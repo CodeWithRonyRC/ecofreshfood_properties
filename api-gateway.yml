@@ -1,1 +1,24 @@
-mensaje:  "Hola desde el repositorio de Git remoto"
+# Configuración del Cliente de Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+# Configuración de las Rutas de Spring Cloud Gateway
+spring:
+  cloud:
+    gateway:
+      # Descubrimiento automático: Permite enrutar usando los nombres de los servicios en Eureka de forma implícita
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      
+      # Definición de rutas explícitas (Dejo un ejemplo comentado para cuando crees tus microservicios de negocio)
+      # routes:
+      #   - id: productos-service
+      #     uri: lb://productos-service # "lb://" le dice a Gateway que use Load Balancer (Balanceo de carga) mediante Eureka
+      #     predicates:
+      #       - Path=/api/v1/productos/**
