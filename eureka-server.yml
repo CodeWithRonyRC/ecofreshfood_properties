@@ -1,1 +1,10 @@
-
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    # Como este proyecto ES el servidor, no debe registrarse a sí mismo como cliente
+    register-with-eureka: false
+    # Tampoco necesita descargar la lista de clientes de sí mismo
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
