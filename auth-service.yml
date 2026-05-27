@@ -7,8 +7,8 @@ server:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/ecofreshfood_auth_db # Asegúrate de que esta DB exista en tu Postgres
-    username: tu_usuario_postgres_aquí
-    password: tu_contraseña_postgres_aquí
+    username: admin
+    password: admin12345
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
