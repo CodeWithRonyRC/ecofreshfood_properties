@@ -1,23 +1,42 @@
-# Configuración de la Base de Datos (Ajusta a tus credenciales locales)
+# Configuración del servidor y comportamiento general
+server:
+  error:
+    include-message: always
+
+# Configuración de la Base de Datos (PostgreSQL)
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/ecofreshfood_auth_db
-    username: root
-    password: "12345"
+    url: jdbc:postgresql://localhost:5432/ecofreshfood_auth_db # Asegúrate de que esta DB exista en tu Postgres
+    username: tu_usuario_postgres_aquí
+    password: tu_contraseña_postgres_aquí
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: update # Crea o actualiza las tablas automáticamente basándose en tus entidades
+    show-sql: true # Muestra las consultas SQL en la consola (ideal para desarrollo)
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
-# Registro en Eureka
+# Registro automático en el Servidor Eureka
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
   instance:
-    prefer-ip-address: true
+    prefer-ip-address: true # Recomendado en entornos de microservicios para evitar problemas de DNS locales
 
-# Propiedades personalizadas para tu lógica de JWT (Las leerás en tu código)
+# Propiedades personalizadas para la seguridad de tu JwtProvider
 jwt:
-  secret: "TuClaveSecretaSuperSeguraYMuyLargaParaFirmarLosTokensJWT1234567890"
-  expiration: 3600000 # Tiempo de vida del token en milisegundos (Ej: 1 hora)
+  # La clave debe ser un String largo, complejo y seguro (mínimo 256 bits / 32 caracteres)
+  secret: "TuClaveSecretaSuperSeguraYMuyLargaParaFirmarLosTokensJWT1234567890EcoFreshFood2026"
+  # Tiempo de expiración del token en milisegundos (Ej: 3600000 ms = 1 hora)
+  expiration: 3600000
+
+# Exponer endpoints de monitoreo (Opcional, útil para Actuator)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
