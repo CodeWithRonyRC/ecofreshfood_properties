@@ -6,7 +6,7 @@ server:
 # Configuración de la Base de Datos (PostgreSQL)
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/ecofreshfood_auth_db # Asegúrate de que esta DB exista en tu Postgres
+    url: jdbc:postgresql://localhost:5432/ecofreshfood_db # Asegúrate de que esta DB exista en tu Postgres
     username: admin
     password: admin12345
     driver-class-name: org.postgresql.Driver
